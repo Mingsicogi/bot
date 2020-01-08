@@ -1,0 +1,48 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+group = 'my.mins'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // https://mvnrepository.com/artifact/com.linecorp.bot/line-bot-api-client
+    compile group: 'com.linecorp.bot', name: 'line-bot-api-client', version: '3.3.0'
+
+    // https://mvnrepository.com/artifact/com.linecorp.bot/line-bot-model
+    compile group: 'com.linecorp.bot', name: 'line-bot-model', version: '3.3.0'
+
+    // https://mvnrepository.com/artifact/com.linecorp.bot/line-bot-servlet
+    compile group: 'com.linecorp.bot', name: 'line-bot-servlet', version: '3.3.0'
+
+    // https://mvnrepository.com/artifact/com.linecorp.bot/line-bot-parser
+    compile group: 'com.linecorp.bot', name: 'line-bot-parser', version: '3.3.0'
+
+    // https://mvnrepository.com/artifact/com.linecorp.bot/line-bot-spring-boot
+    compile group: 'com.linecorp.bot', name: 'line-bot-spring-boot', version: '3.3.0'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
