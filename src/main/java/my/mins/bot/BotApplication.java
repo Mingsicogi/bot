@@ -1,13 +1,10 @@
 package my.mins.bot;
 
-import com.linecorp.bot.model.event.Event;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
-import com.linecorp.bot.model.event.source.Source;
 import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
-import com.linecorp.bot.spring.boot.annotation.LineBotMessages;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +33,9 @@ public class BotApplication {
 		log.info("#### event : " + event);
 
 		log.info("#### source : " + event.getSource());
+		log.info("#### group id : " + event.getSource().getSenderId()); // group id
+		log.info("#### user id : " + event.getSource().getUserId()); // user id
+
 
 		final String originalMessageText = event.getMessage().getText();
 		return new TextMessage("지금은 개발중~!");
