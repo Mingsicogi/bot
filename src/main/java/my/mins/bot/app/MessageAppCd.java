@@ -5,12 +5,16 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum MesaageAppCd {
+public enum MessageAppCd {
 
     KAKAO(false, "", ""),
     LINE(true, "https://api.line.me", "/v2/bot/message/push");
 
     private boolean isUse;
     private String apiUrl;
-    private String pushMsaageUri;
+    private String pushMessageUri;
+
+    public String getPushMessageUrl() {
+        return this.apiUrl + this.pushMessageUri;
+    }
 }
