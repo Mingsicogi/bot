@@ -4,7 +4,7 @@ import my.mins.bot.app.MessageAppCd;
 import my.mins.bot.app.MessageCommonService;
 import my.mins.bot.app.MessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +17,18 @@ public class LINEService implements MessageCommonService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${line.bot.channel-token}")
-    private String accessToken;
+    @Autowired
+    private Environment env;
+
+//    @Value("${line.bot.channel-token}")
+//    private String accessToken;
 
     @Override
     public boolean send(MessageDTO message) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
-        headers.set("Authorization", accessToken);
+        headers.set("Authorization", env.getRequiredProperty("line.bot.channel-token"));
 
         HttpEntity<MessageDTO> httpEntity = new HttpEntity<>(message, headers);
 
