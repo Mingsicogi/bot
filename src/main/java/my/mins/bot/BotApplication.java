@@ -1,6 +1,9 @@
 package my.mins.bot;
 
+import com.linecorp.bot.model.event.JoinEvent;
+import com.linecorp.bot.model.event.LeaveEvent;
 import com.linecorp.bot.model.event.MessageEvent;
+import com.linecorp.bot.model.event.message.MessageContent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
 import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
@@ -38,5 +41,18 @@ public class BotApplication {
 
 		final String originalMessageText = event.getMessage().getText();
 		return new TextMessage("지금은 개발중~!");
+	}
+
+	@EventMapping
+	public void joinEventHandling(JoinEvent event) {
+		log.info("#### event : {}", event);
+		log.info("#### source : {}", event.getSource());
+	}
+
+	@EventMapping
+	public void leaveEventHandling(LeaveEvent event) {
+		log.info("#### event : {}", event);
+		log.info("#### source : {}", event.getSource());
+
 	}
 }
