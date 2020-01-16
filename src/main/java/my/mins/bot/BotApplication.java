@@ -1,13 +1,5 @@
 package my.mins.bot;
 
-import com.linecorp.bot.model.event.JoinEvent;
-import com.linecorp.bot.model.event.LeaveEvent;
-import com.linecorp.bot.model.event.MessageEvent;
-import com.linecorp.bot.model.event.message.MessageContent;
-import com.linecorp.bot.model.event.message.TextMessageContent;
-import com.linecorp.bot.model.message.Message;
-import com.linecorp.bot.model.message.TextMessage;
-import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +10,9 @@ import org.springframework.core.env.Environment;
 
 @SpringBootApplication
 @LineMessageHandler
+@PropertySource(value = {
+		"classpath:common.properties"
+})
 public class BotApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(BotApplication.class);
@@ -28,31 +23,5 @@ public class BotApplication {
 		String phaseCd = env.getRequiredProperty("line.bot.channel-token"); //실행환경  System.out.println(phaseCd);
 
 		log.info(phaseCd);
-	}
-
-	@EventMapping
-	public Message handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
-		log.info("#### event : " + event);
-
-		log.info("#### source : " + event.getSource());
-		log.info("#### group id : " + event.getSource().getSenderId()); // group id
-		log.info("#### user id : " + event.getSource().getUserId()); // user id
-
-
-		final String originalMessageText = event.getMessage().getText();
-		return new TextMessage("지금은 개발중~!");
-	}
-
-	@EventMapping
-	public void joinEventHandling(JoinEvent event) {
-		log.info("#### event : {}", event);
-		log.info("#### source : {}", event.getSource());
-	}
-
-	@EventMapping
-	public void leaveEventHandling(LeaveEvent event) {
-		log.info("#### event : {}", event);
-		log.info("#### source : {}", event.getSource());
-
 	}
 }
