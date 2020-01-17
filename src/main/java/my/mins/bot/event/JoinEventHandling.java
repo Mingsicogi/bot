@@ -18,6 +18,7 @@ public class JoinEventHandling {
     @Value("${domain}")
     private String jmtDomain;
 
+
     @EventMapping
     public void joinEventHandling(JoinEvent event) {
         log.info("#### event : {}", event);

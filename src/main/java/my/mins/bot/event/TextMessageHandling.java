@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @LineMessageHandler
 @Slf4j
 public class TextMessageHandling {
+
     @EventMapping
     public Message handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
         log.info("#### event : " + event);
